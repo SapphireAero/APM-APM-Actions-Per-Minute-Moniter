@@ -58,5 +58,11 @@ src/main/java/com/apm/monitor
 
 ## 运行环境
 
+- 操作系统：Windows 10/11（x64，当前窗口识别依赖 JNA User32）
 - JDK 17
-- Maven 3.9+
+- Maven：3.9+
+- 构建编码：UTF-8
+- JavaFX：`javafx-controls 17.0.10`
+- 全局输入监听：`jnativehook 2.2.2`
+- Windows API 调用：`jna-platform 5.14.0`
+- 首次构建需要可访问 Maven 仓库（用于下载依赖）

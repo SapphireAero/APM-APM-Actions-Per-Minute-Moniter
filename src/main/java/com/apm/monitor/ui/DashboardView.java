@@ -33,6 +33,7 @@ import java.util.List;
  * 控制器通过公开的 getter/更新方法与该类交互。
  */
 public class DashboardView {
+    private static final String AUTHOR_TEXT = "作者：SapphireAero";
     private final BorderPane root = new BorderPane();
     private final Label realtimeValue = new Label("0");
     private final Label averageValue = new Label("0");
@@ -296,7 +297,17 @@ public class DashboardView {
         chart.setTitle("APM 波动趋势");
         chart.getData().add(apmSeries);
 
-        VBox box = new VBox(chart);
+        Label authorLabel = new Label(AUTHOR_TEXT);
+        authorLabel.setFont(Font.font("Microsoft YaHei", FontWeight.NORMAL, 11));
+        authorLabel.setTextFill(Color.web("#5d6f84"));
+
+        StackPane spacer = new StackPane();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        HBox authorRow = new HBox(6, spacer, authorLabel);
+        authorRow.setAlignment(Pos.CENTER_RIGHT);
+        authorRow.setPadding(new Insets(4, 2, 0, 2));
+
+        VBox box = new VBox(chart, authorRow);
         box.setPadding(new Insets(8));
         box.setStyle(DashboardStyleTokens.CHART_CARD);
         return box;
