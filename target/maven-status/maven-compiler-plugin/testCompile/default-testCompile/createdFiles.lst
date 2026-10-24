@@ -1,0 +1,8 @@
+com\apm\monitor\ui\DashboardControllerTest$TestBackend.class
+com\apm\monitor\core\engine\ApmMonitorEngineTest.class
+com\apm\monitor\core\hook\WindowsRawInputServiceTest.class
+com\apm\monitor\ui\DashboardControllerTest.class
+com\apm\monitor\ui\DashboardControllerTest$FxAction.class
+com\apm\monitor\core\engine\ApmMonitorEngineTest$BlockingWindow.class
+com\apm\monitor\core\stats\ApmStatsCalculatorTest.class
+com\apm\monitor\core\hook\RawInputDecoderTest.class

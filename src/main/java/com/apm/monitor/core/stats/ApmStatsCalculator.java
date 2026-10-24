@@ -44,7 +44,8 @@ public final class ApmStatsCalculator {
         long cutoff = referenceEpochSecond - seconds;
         List<ApmPoint> result = new ArrayList<>();
         for (ApmPoint point : points) {
-            if (point.epochSecond() >= cutoff) {
+            // 一秒一个采样点，时间范围采用 (cutoff, reference]，避免多算一秒。
+            if (point.epochSecond() > cutoff && point.epochSecond() <= referenceEpochSecond) {
                 result.add(point);
             }
         }

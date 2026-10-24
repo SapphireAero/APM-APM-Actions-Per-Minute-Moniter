@@ -153,6 +153,10 @@ public class DashboardView {
         }
     }
 
+    public void setChartHistoryLimited(boolean limited) {
+        chart.setTitle(limited ? "APM 波动趋势（仅显示最近记录）" : "APM 波动趋势");
+    }
+
     public void showInfo(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);

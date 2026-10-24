@@ -58,7 +58,12 @@ public class ApmBackendService implements ApmBackend {
 
     @Override
     public boolean isHookReady() {
-        return hookReady;
+        return hookReady && hookService.isReady();
+    }
+
+    @Override
+    public String inputSourceName() {
+        return hookService.inputSourceName();
     }
 
     @Override

@@ -18,6 +18,9 @@ import java.util.Objects;
  * @param filterByWindow      是否启用窗口过滤
  * @param monitoring          当前是否处于监控状态
  * @param points              历史点序列（不可变副本）
+ * @param allTimeAverageApm   本次统计全程的平均 APM，不受历史点保留上限影响
+ * @param allTimePeakApm      本次统计全程的峰值 APM
+ * @param historyTruncated    趋势图历史是否已达到保留上限
  */
 public record ApmSnapshot(
         long snapshotEpochSecond,
@@ -27,7 +30,10 @@ public record ApmSnapshot(
         String targetWindowTitle,
         boolean filterByWindow,
         boolean monitoring,
-        List<ApmPoint> points
+        List<ApmPoint> points,
+        int allTimeAverageApm,
+        int allTimePeakApm,
+        boolean historyTruncated
 ) {
     /**
      * 规范化构造，确保快照对象对上层是安全且可预测的。

@@ -24,6 +24,11 @@ public interface ApmBackend extends AutoCloseable {
      */
     boolean isHookReady();
 
+    /** 当前生效的输入通道，供兼容性诊断使用。 */
+    default String inputSourceName() {
+        return "JNativeHook";
+    }
+
     /**
      * 设置窗口标题过滤关键字。
      *

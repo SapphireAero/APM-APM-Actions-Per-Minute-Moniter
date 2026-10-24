@@ -190,7 +190,7 @@ public class DashboardController implements AutoCloseable {
         } else {
             backend().startMonitoring();
             dashboardView.monitorButton().setText(TEXT_MONITOR_PAUSE);
-            dashboardView.setMonitorStatus(TEXT_MONITOR_RUNNING_STATUS, STATUS_RUNNING);
+            dashboardView.setMonitorStatus(runningStatusText(), STATUS_RUNNING);
         }
     }
 
@@ -208,8 +208,10 @@ public class DashboardController implements AutoCloseable {
                 lastSnapshot.snapshotEpochSecond()
         );
         dashboardView.setRealtimeApm(lastSnapshot.currentApm());
-        dashboardView.setAverageApm(ApmStatsCalculator.average(rangedPoints));
-        dashboardView.setPeakApm(ApmStatsCalculator.peak(rangedPoints));
+        dashboardView.setAverageApm(range == StatsRange.ALL
+                ? lastSnapshot.allTimeAverageApm() : ApmStatsCalculator.average(rangedPoints));
+        dashboardView.setPeakApm(range == StatsRange.ALL
+                ? lastSnapshot.allTimePeakApm() : ApmStatsCalculator.peak(rangedPoints));
         dashboardView.setActiveWindow("当前窗口：" + lastSnapshot.activeWindowTitle());
         dashboardView.setTimerText("统计计时：" + formatSeconds(lastSnapshot.elapsedSeconds()));
         updateGameStatus(lastSnapshot);
@@ -218,7 +220,7 @@ public class DashboardController implements AutoCloseable {
         if (!backend().isHookReady()) {
             dashboardView.setMonitorStatus(TEXT_MONITOR_FAILED_STATUS, STATUS_ERROR);
         } else if (lastSnapshot.monitoring()) {
-            dashboardView.setMonitorStatus(TEXT_MONITOR_RUNNING_STATUS, STATUS_RUNNING);
+            dashboardView.setMonitorStatus(runningStatusText(), STATUS_RUNNING);
             dashboardView.monitorButton().setText(TEXT_MONITOR_PAUSE);
         } else {
             dashboardView.setMonitorStatus(TEXT_MONITOR_PAUSED_STATUS, STATUS_PAUSED);
@@ -242,6 +244,7 @@ public class DashboardController implements AutoCloseable {
                 lastSnapshot.snapshotEpochSecond()
         );
         List<ApmPoint> linePoints = ApmStatsCalculator.aggregateByStep(rangedPoints, step.seconds());
+        dashboardView.setChartHistoryLimited(range == StatsRange.ALL && lastSnapshot.historyTruncated());
         dashboardView.setChartPoints(linePoints);
     }
 
@@ -328,6 +331,10 @@ public class DashboardController implements AutoCloseable {
             dashboardView.monitorButton().setDisable(true);
             dashboardView.setMonitorStatus(TEXT_MONITOR_FAILED_STATUS, STATUS_ERROR);
         }
+    }
+
+    private String runningStatusText() {
+        return TEXT_MONITOR_RUNNING_STATUS + "（" + backend().inputSourceName() + "）";
     }
 
     /**

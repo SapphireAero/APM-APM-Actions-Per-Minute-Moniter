@@ -1,2 +1,5 @@
-c:\Users\Lenovo\Desktop\APM Monitor\src\test\java\com\apm\monitor\core\ApmMonitorEngineTest.java
-c:\Users\Lenovo\Desktop\APM Monitor\src\test\java\com\apm\monitor\core\ApmStatsCalculatorTest.java
+F:\项目\APM Monitor\src\test\java\com\apm\monitor\core\engine\ApmMonitorEngineTest.java
+F:\项目\APM Monitor\src\test\java\com\apm\monitor\core\hook\RawInputDecoderTest.java
+F:\项目\APM Monitor\src\test\java\com\apm\monitor\core\hook\WindowsRawInputServiceTest.java
+F:\项目\APM Monitor\src\test\java\com\apm\monitor\core\stats\ApmStatsCalculatorTest.java
+F:\项目\APM Monitor\src\test\java\com\apm\monitor\ui\DashboardControllerTest.java

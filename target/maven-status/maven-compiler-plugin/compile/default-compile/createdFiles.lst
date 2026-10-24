@@ -1,0 +1,4 @@
+com\apm\monitor\core\hook\WindowsRawInputService.class
+com\apm\monitor\core\hook\RawInputDecoder.class
+com\apm\monitor\core\hook\WindowsRawInputService$RawInputDevice.class
+com\apm\monitor\core\hook\WindowsRawInputService$RawUser32.class
